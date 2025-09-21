@@ -4,6 +4,7 @@ import com.compagny.dvdstore.entity.Movie;
 import com.compagny.dvdstore.service.DefaultMovieService;
 import com.compagny.dvdstore.service.MovieServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Controller;
 
 import java.util.Scanner;
@@ -22,6 +23,20 @@ public class MovieController {
         this.movieService = movieService;
     }
 
+    public MovieController (MovieServiceInterface movie) {
+        this.movieService = movie;
+    }
+
+    public void createMovie(){
+
+        String customerName="Taxi";
+        Movie movie=new Movie();
+        movie.setTitle(customerName);
+        movie.setGenre(customerName);
+
+        movieService.registerMovie(movie);
+    }
+
     public void addUsingConsole(){
         System.out.println( "Quel est le nom du film" );
         Scanner scanner=new Scanner(System.in);
@@ -32,7 +47,7 @@ public class MovieController {
         Movie movie=new Movie();
         movie.setTitle(title);
         movie.setGenre(genre);
-        
+
         movieService.registerMovie(movie);
     }
 }
